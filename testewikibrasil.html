@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Incorporar Conteúdo da Wikipédia</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $.get('https://pt.wikipedia.org/wiki/Brasil', function(data){
+        var content = $(data).find('.mw-content-ltr.mw-parser-output').html();
+        $('#wiki-content').html(content);
+    });
+});
+</script>
+</head>
+<body>
+<div id="wiki-content">
+    <!-- O conteúdo da Wikipédia será inserido aqui -->
+</div>
+</body>
+</html>
