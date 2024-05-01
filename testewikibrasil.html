@@ -3,14 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Incorporar Conteúdo da Wikipédia</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function(){
-    $.get('https://pt.wikipedia.org/wiki/Brasil', function(data){
-        var content = $(data).find('.mw-content-ltr.mw-parser-output').html();
-        $('#wiki-content').html(content);
-    });
-});
+window.onload = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://pt.wikipedia.org/wiki/Brasil', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(xhr.responseText, 'text/html');
+            var content = doc.getElementById('mw-content-text').innerHTML;
+            document.getElementById('wiki-content').innerHTML = content;
+        }
+    };
+    xhr.send();
+};
 </script>
 </head>
 <body>
